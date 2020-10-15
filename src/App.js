@@ -18,6 +18,13 @@ const App = () => {
     setTodoList(newTodoList);
   };
 
+  const editTodo = (id, updatedTask) => {
+    const newTodoList = [...todoList];
+    const targetIdx = newTodoList.findIndex(e => e.id === id);
+    newTodoList[targetIdx].task = updatedTask;
+    setTodoList(newTodoList);
+  };
+
   return (
     <Row justify="center" >
       <Col span={6} style={{ border: "1px solid salmon" }} style={{ border: "1px solid salmon" }}>
@@ -37,9 +44,9 @@ const App = () => {
               bordered
               dataSource={todoList}
               renderItem={item => (
-                <List.Item>
-                  <TodoItem item={item} deleteTodo={deleteTodo} />
-                </List.Item>
+                <>
+                  <TodoItem editTodo={editTodo} item={item} deleteTodo={deleteTodo} />
+                </>
               )}
             />
           </Col>
